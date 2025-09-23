@@ -15,11 +15,11 @@ jobs:
       - name: Select Xcode
         run: sudo xcode-select -s "/Applications/Xcode.app"
       - name: Resolve SPM
-        run: xcodebuild -resolvePackageDependencies -scheme "App"
+        run: xcodebuild -resolvePackageDependencies -scheme "CoWorkerAI"
       - name: Build
-        run: xcodebuild -scheme "App" -destination 'platform=iOS Simulator,name=iPhone 15'
+        run: xcodebuild -scheme "CoWorkerAI" -destination 'platform=iOS Simulator,name=iPhone 15'
       - name: Test
-        run: xcodebuild test -scheme "App" -destination 'platform=iOS Simulator,name=iPhone 15'
+        run: xcodebuild test -scheme "CoWorkerAI" -destination 'platform=iOS Simulator,name=iPhone 15'
 
   template-ok:
     if: ${{ hashFiles('**/*.xcodeproj','**/*.xcworkspace') == '' }}

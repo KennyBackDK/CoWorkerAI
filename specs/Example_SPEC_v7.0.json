@@ -1,6 +1,6 @@
 {
-  "product_name": "NotesPro",
-  "bundle_id": "com.acme.notespro",
+  "product_name": "CoWorkerAI",
+  "bundle_id": "com.kenny.coworkerai",
   "platform": "ios",
   "min_os": "iOS 17",
   "features": [
