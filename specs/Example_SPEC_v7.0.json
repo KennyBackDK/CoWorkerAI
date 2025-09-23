@@ -1,0 +1,84 @@
+{
+  "product_name": "NotesPro",
+  "bundle_id": "com.acme.notespro",
+  "platform": "ios",
+  "min_os": "iOS 17",
+  "features": [
+    {
+      "id": "notes-crud",
+      "desc": "Opret/redigér/slet noter",
+      "priority": "p0"
+    },
+    {
+      "id": "search",
+      "desc": "Søg med debounce",
+      "priority": "p1",
+      "depends_on": [
+        "notes-crud"
+      ]
+    }
+  ],
+  "persistence": {
+    "type": "file",
+    "encryption": true
+  },
+  "apiSchemas": {
+    "type": "openapi",
+    "schemas": [
+      {
+        "name": "Notes",
+        "inline": {}
+      }
+    ]
+  },
+  "providers": {
+    "network": [
+      "URLSession"
+    ],
+    "ai": [
+      "OpenAI"
+    ],
+    "telemetry": [
+      "MetricKit"
+    ]
+  },
+  "security": {
+    "keychain": true,
+    "allow_third_party": false
+  },
+  "privacy": {
+    "pii_in_logs": false,
+    "retention_days": 30
+  },
+  "observability": {
+    "logging": true,
+    "metrics": true,
+    "signposts": true
+  },
+  "quality_gates": {
+    "lint": true,
+    "format": true,
+    "perf_budget": {
+      "ttr_ms": 150,
+      "p50_local_net_ms": 300,
+      "mem_mb": 150
+    }
+  },
+  "design_tokens": {
+    "grid": 8,
+    "radius": {
+      "xs": 8,
+      "sm": 12,
+      "md": 16,
+      "lg": 24
+    },
+    "typography": {
+      "title": "largeTitle",
+      "body": "body",
+      "caption": "caption"
+    }
+  },
+  "ci": {
+    "github_actions": true
+  }
+}

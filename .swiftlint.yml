@@ -1,0 +1,4 @@
+line_length: 120
+opt_in_rules: [explicit_self]
+rules:
+  force_unwrapping: error

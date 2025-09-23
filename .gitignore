@@ -1,0 +1,30 @@
+# Xcode / Swift / macOS
+DerivedData/
+build/
+*.xcworkspace/xcuserdata/
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.swiftpm/
+Packages/
+.swiftlint.yml.lock
+
+# Swift Package Manager
+.build/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/README.md
+
+# Misc
+.DS_Store
+*.log

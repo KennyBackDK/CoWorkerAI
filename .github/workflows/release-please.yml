@@ -1,0 +1,17 @@
+name: release-please
+on:
+  push:
+    branches: [ "main" ]
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    # kør kun i rigtige projekter – ikke når repoet er mærket som template
+    if: ${{ github.event.repository.is_template == false }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        with:
+          release-type: simple

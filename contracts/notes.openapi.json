@@ -1,0 +1,17 @@
+{
+  "openapi": "3.1.0",
+  "info": { "title": "Notes API (mini)", "version": "0.1.0" },
+  "paths": {
+    "/notes": {
+      "get": {
+        "summary": "List notes",
+        "responses": { "200": { "description": "Array of notes" } }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Note": { "type": "object", "properties": { "id": { "type": "string" }, "title": { "type": "string" } }, "required": ["id","title"] }
+    }
+  }
+}

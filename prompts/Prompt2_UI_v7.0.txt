@@ -1,0 +1,2 @@
+# Prompt2 — UI/UX (SwiftUI) v7.0
+(udtræk — se canvas for fuld tekst)
