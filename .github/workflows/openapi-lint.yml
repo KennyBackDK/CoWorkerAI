@@ -6,7 +6,7 @@ jobs:
   spectral:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: stoplightio/spectral-action@latest
         with:
           file_glob: 'contracts/**/*.{json,yaml,yml}'
