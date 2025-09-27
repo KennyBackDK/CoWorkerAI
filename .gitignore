@@ -28,3 +28,17 @@ fastlane/README.md
 # Misc
 .DS_Store
 *.log
+# Xcode / DerivedData
+DerivedData/
+xcuserdata/
+*.xcuserstate
+
+# SwiftPM / misc
+.build/
+
+# Our safety backups
+.backup-*/
+.backup-rootfiles-*/
+
+# macOS Finder
+.DS_Store
