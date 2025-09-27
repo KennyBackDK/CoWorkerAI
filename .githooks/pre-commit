@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Ensure scripts are executable
+chmod +x scripts/preflight.sh >/dev/null 2>&1 || true
+
+# Run preflight checks
+scripts/preflight.sh
