@@ -20,6 +20,7 @@ final class NotesViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
+    // MARK: - Data
     func load() {
         let fetched = repository.fetchNotes()
         allNotes = fetched
@@ -34,10 +35,20 @@ final class NotesViewModel: ObservableObject {
         }
     }
 
+    // MARK: - Actions
     func addSampleNote() {
         let n = Note(title: "Ny note", body: "Oprettet via +")
         repository.add(note: n)
         load()
+    }
+
+    func save(_ updated: Note) {
+        // simple replace-by-id
+        if let idx = allNotes.firstIndex(where: { $0.id == updated.id }) {
+            allNotes[idx] = updated
+        }
+        repository.replaceAll(with: allNotes)
+        applyFilter(searchQuery)
     }
 
     func delete(at offsets: IndexSet) {
@@ -45,6 +56,11 @@ final class NotesViewModel: ObservableObject {
             let n = filteredNotes[i]
             repository.delete(note: n)
         }
+        load()
+    }
+
+    func delete(note: Note) {
+        repository.delete(note: note)
         load()
     }
 }

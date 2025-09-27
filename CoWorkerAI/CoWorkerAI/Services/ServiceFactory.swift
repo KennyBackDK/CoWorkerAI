@@ -1,22 +1,24 @@
 // File: CoWorkerAI/CoWorkerAI/Services/ServiceFactory.swift
 import Foundation
 
-protocol ServiceFactoryProtocol {
-    func makeNotesRepository() -> NotesRepository
-}
-
-final class ServiceFactory: ServiceFactoryProtocol {
+/// Central fabrik for appens services/repositories.
+/// Bruges fra UI (ContentView) til at få konkrete implementationer.
+final class ServiceFactory {
     static let shared = ServiceFactory()
     private init() {}
 
-    func makeNotesRepository() -> NotesRepository {
-        do {
-            let url = try AppPaths.shared.notesFileURL()
-            return FileNotesRepository(fileURL: url)
-        } catch {
-            LoggerService.shared.error("Falling back to temp notes store due to error: \(String(describing: error))")
-            let tmp = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("Notes.json")
-            return FileNotesRepository(fileURL: tmp)
-        }
+    // MARK: - Notes
+
+    /// Returnér en konkret notes-repository.
+    /// Skift implementation her, hvis du senere vil bruge en anden kilde.
+    func makeNotesRepository() -> NotesRepositoryProtocol {
+        NotesRepository()
+    }
+
+    // MARK: - Prompts
+
+    /// Returnér en konkret prompts-repository.
+    func makePromptRepository() -> PromptRepositoryProtocol {
+        PromptRepository()
     }
 }

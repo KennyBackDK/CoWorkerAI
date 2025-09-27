@@ -12,59 +12,38 @@ struct NotesView: View {
         }
     }
 
+    // MARK: - Toolbar
     private var toolbar: some View {
         HStack(spacing: 8) {
             Button {
-                viewModel.createNote()
+                viewModel.addSampleNote()
             } label: {
                 Label("New", systemImage: "plus")
             }
             .keyboardShortcut("n", modifiers: [.command])
 
-            TextField("Search title, body, tags…", text: $viewModel.searchText)
+            TextField("Search title or body…", text: $viewModel.searchQuery)
                 .textFieldStyle(.roundedBorder)
                 .frame(maxWidth: 400)
 
-            if !viewModel.activeTags.isEmpty {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 6) {
-                        ForEach(Array(viewModel.activeTags).sorted(), id: \.self) { tag in
-                            HStack(spacing: 4) {
-                                Image(systemName: "tag.fill")
-                                Text(tag)
-                                Button {
-                                    viewModel.toggleTagFilter(tag)
-                                } label: {
-                                    Image(systemName: "xmark.circle.fill")
-                                }
-                                .buttonStyle(.borderless)
-                            }
-                            .padding(.vertical, 4).padding(.horizontal, 8)
-                            .background(.quaternary, in: Capsule())
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            } else {
-                Spacer()
-            }
+            Spacer()
         }
         .padding(8)
     }
 
+    // MARK: - Content
     private var content: some View {
-        Table(viewModel.filteredNotes, selection: $viewModel.selection) {
-            TableColumn("Title", value: \.title)
-            TableColumn("Tags") { note in
-                Text(note.tags.joined(separator: ", "))
-                    .foregroundStyle(.secondary)
+        List {
+            ForEach(viewModel.filteredNotes) { note in
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(note.title)
+                        .font(.headline)
+                    Text(note.body)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
             }
-            TableColumn("Updated") { note in
-                Text(note.updatedAt, style: .date)
-                    .foregroundStyle(.secondary)
-            }
+            .onDelete(perform: viewModel.delete)
         }
-        .tableStyle(.inset)
     }
 }
-

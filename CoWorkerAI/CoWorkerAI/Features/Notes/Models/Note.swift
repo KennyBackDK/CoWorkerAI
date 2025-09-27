@@ -1,20 +1,27 @@
-// File: CoWorkerAI/CoWorkerAI/Features/Notes/Models/Note.swift
 import Foundation
 
-struct Note: Identifiable, Codable, Hashable {
-    let id: UUID
-    var title: String
-    var body: String
-    var tags: [String]
-    var createdAt: Date
-    var updatedAt: Date
+/// En simpel, serialiserbar note-model.
+public struct Note: Identifiable, Equatable, Codable {
+    public let id: UUID
+    public var title: String
+    public var body: String
+    public var createdAt: Date
+    public var updatedAt: Date
+    public var tags: [String]
 
-    init(id: UUID = UUID(), title: String = "", body: String = "", tags: [String] = [], createdAt: Date = Date(), updatedAt: Date = Date()) {
+    public init(
+        id: UUID = UUID(),
+        title: String,
+        body: String,
+        createdAt: Date = Date(),
+        updatedAt: Date = Date(),
+        tags: [String] = []
+    ) {
         self.id = id
         self.title = title
         self.body = body
-        self.tags = tags
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.tags = tags
     }
 }

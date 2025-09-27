@@ -1,39 +1,57 @@
-// File: CoWorkerAI/CoWorkerAI/Persistence/AppPaths.swift
 import Foundation
 
 enum AppPathsError: Error {
-    case couldNotResolveAppSupport
+    case couldNotResolveBase
 }
 
+/// Centraliserede stier for app-data (virker på både macOS og iOS).
 final class AppPaths {
     static let shared = AppPaths()
     private init() {}
 
+    // Produktnavn bruges til mappen på macOS ~/Library/Application Support/<produkt>
     private var productName: String {
+        // Brug Info.plist-navn hvis tilgængeligt, ellers fallback.
         if let name = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String, !name.isEmpty {
             return name
         }
         return "CoWorkerAI"
     }
 
-    func appSupportDirectory() throws -> URL {
-        let fm = FileManager.default
-        guard let base = fm.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
-            throw AppPathsError.couldNotResolveAppSupport
+    /// Base-mappe til vedvarende data.
+    ///
+    /// - macOS: `~/Library/Application Support/<produkt>`
+    /// - iOS:   Appens Documents-mappe
+    func baseDirectory() throws -> URL {
+        #if os(macOS)
+        guard let lib = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
+            throw AppPathsError.couldNotResolveBase
         }
-        return base.appendingPathComponent(productName, conformingTo: .directory)
+        return lib.appendingPathComponent(productName, conformingTo: .directory)
+        #else
+        guard let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
+            throw AppPathsError.couldNotResolveBase
+        }
+        return docs
+        #endif
     }
 
-    func ensureAppSupportDirectory() throws {
-        let url = try appSupportDirectory()
-        let fm = FileManager.default
+    /// Sørger for at base-mappen findes.
+    func ensureBaseDirectoryExists() throws {
+        let dir = try baseDirectory()
         var isDir: ObjCBool = false
-        if !fm.fileExists(atPath: url.path, isDirectory: &isDir) || !isDir.boolValue {
-            try fm.createDirectory(at: url, withIntermediateDirectories: true)
+        if !FileManager.default.fileExists(atPath: dir.path, isDirectory: &isDir) || !isDir.boolValue {
+            try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         }
     }
 
+    /// JSON-fil til noter.
     func notesFileURL() throws -> URL {
-        try appSupportDirectory().appendingPathComponent("Notes.json", conformingTo: .json)
+        try baseDirectory().appendingPathComponent("Notes.json", conformingTo: .json)
+    }
+
+    /// JSON-fil til prompt-bibliotek.
+    func promptsFileURL() throws -> URL {
+        try baseDirectory().appendingPathComponent("Prompts.json", conformingTo: .json)
     }
 }

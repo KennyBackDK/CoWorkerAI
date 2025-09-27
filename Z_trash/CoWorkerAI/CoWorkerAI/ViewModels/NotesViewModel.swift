@@ -1,3 +1,4 @@
+// File: CoWorkerAI/CoWorkerAI/ViewModels/NotesViewModel.swift
 import Foundation
 import Combine
 
@@ -35,8 +36,7 @@ final class NotesViewModel: ObservableObject {
     }
 
     func addSampleNote() {
-        let n = Note(title: "Ny note", body: "Oprettet via +")
-        repository.add(note: n)
+        repository.add(note: Note(title: "Ny note", body: "Oprettet via +"))
         load()
     }
 

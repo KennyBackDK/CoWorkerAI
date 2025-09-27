@@ -1,3 +1,4 @@
+// File: CoWorkerAI/CoWorkerAI/App/ContentView.swift
 import SwiftUI
 
 struct ContentView: View {
@@ -5,8 +6,11 @@ struct ContentView: View {
     @StateObject private var promptsVM: PromptLibraryViewModel
 
     init() {
+        // Repos
         let repoNotes: NotesRepositoryProtocol = ServiceFactory.shared.makeNotesRepository()
         let repoPrompts: PromptRepositoryProtocol = ServiceFactory.shared.makePromptRepository()
+
+        // StateObjects
         _notesVM = StateObject(wrappedValue: NotesViewModel(repository: repoNotes))
         _promptsVM = StateObject(wrappedValue: PromptLibraryViewModel(repository: repoPrompts))
     }
