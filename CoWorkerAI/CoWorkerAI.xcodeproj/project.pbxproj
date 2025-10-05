@@ -10,9 +10,22 @@
 		B95D64BD2E83B28E00CA6B60 /* CoWorkerAI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoWorkerAI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B98195BC2E92931D00520775 /* Exceptions for "CoWorkerAI" folder in "CoWorkerAI" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Features/Prompts/ViewModels/PromptListViewModel.swift,
+			);
+			target = B95D64BC2E83B28E00CA6B60 /* CoWorkerAI */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B95D64BF2E83B28E00CA6B60 /* CoWorkerAI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B98195BC2E92931D00520775 /* Exceptions for "CoWorkerAI" folder in "CoWorkerAI" target */,
+			);
 			path = CoWorkerAI;
 			sourceTree = "<group>";
 		};
