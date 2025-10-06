@@ -1,44 +1,20 @@
-# Xcode / Swift / macOS
+# macOS
+.DS_Store
+
+# Xcode / Derived
 DerivedData/
 build/
 *.xcworkspace/xcuserdata/
-xcuserdata/
-*.xcuserstate
-*.xccheckout
-*.swiftpm/
-Packages/
-.swiftlint.yml.lock
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
 
-# Swift Package Manager
-.build/
+# SwiftPM
+.packages/
+.swiftpm/
 
-# CocoaPods
-Pods/
-
-# Carthage
-Carthage/Build/
-
-# Fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
-fastlane/README.md
-
-# Misc
-.DS_Store
+# Logs
 *.log
-# Xcode / DerivedData
-DerivedData/
-xcuserdata/
-*.xcuserstate
 
-# SwiftPM / misc
-.build/
-
-# Our safety backups
-.backup-*/
-.backup-rootfiles-*/
-
-# macOS Finder
-.DS_Store
+# Secrets
+*.env
+Secrets.plist
